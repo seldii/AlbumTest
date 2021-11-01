@@ -1,0 +1,26 @@
+.Album_Wrapper {
+  padding: 10px;
+  background-color: indigo;
+}
+
+.Album_GridContainer {
+  background-color: red;
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(12, 1fr);
+  justify-content: center;
+}
+
+/* .Album_GridContainer img:nth-last-child(12) {
+  grid-column: 4/6;
+} */
+
+@media only screen and (min-device-width: 412px) and (max-device-width: 700px) and (-webkit-min-device-pixel-ratio: 3) {
+  .Album_GridContainer {
+    background-color: green;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+}
