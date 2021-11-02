@@ -4,6 +4,7 @@ import AlbumImage from "../albumImage/AlbumImage";
 import "./album.css";
 import CloseIcon from "@material-ui/icons/Close";
 import BtnModal from "./BtnModal";
+import { useHistory } from "react-router-dom";
 
 function Album() {
   const {

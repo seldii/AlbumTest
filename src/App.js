@@ -6,8 +6,6 @@ import { S3Client, S3 } from "@aws-sdk/client-s3";
 import { LinearProgress } from "@material-ui/core";
 import { useState } from "react";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
-import * as dotenv from "dotenv";
-dotenv.config();
 
 function App() {
   const [imgUpload, setImgUpload] = useState(0);
@@ -31,7 +29,7 @@ function App() {
       Body: file,
     };
     const creds = {
-      accessKeyId: process.env.REACT_APP_aws_access_key_id, //REVIEW check use of credentials
+      accessKeyId: process.env.REACT_APP_aws_access_key_id,
       secretAccessKey: process.env.REACT_APP_aws_secret_access_key,
     };
     try {
@@ -51,6 +49,7 @@ function App() {
 
       parallelUploads3.done();
       setImgUpload(100);
+      console.log("file uploaded");
     } catch (e) {
       console.log("error", e.message);
     }
@@ -72,7 +71,6 @@ function App() {
             valueBuffer={imgUpload}
             color="secondary"
           />
-          {/* <Carousel /> */}
           <Album />
         </Route>
       </Switch>
