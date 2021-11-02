@@ -1,15 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { AlbumContext } from "../../context/AlbumContext";
 import AlbumImage from "../albumImage/AlbumImage";
 import "./album.css";
-import "../albumImage/albumImage.css";
-import "../carousel/carousel.css";
-// import CloseIcon from "@material-ui/icons/Close";
-
-import BtnSlider from "../carousel/BtnSlider";
-import { CircularProgress } from "@material-ui/core";
-
-// import "./album.css";
+import CloseIcon from "@material-ui/icons/Close";
+import BtnModal from "./BtnModal";
 
 function Album() {
   const {
@@ -33,18 +27,12 @@ function Album() {
 
   console.log("slideIndex", slideIndex);
 
-  // const nextSlide = () => {
-  //   if (slideIndex !== albums.length) {
-  //     setSlideIndex(slideIndex);
-  //   } else if (slideIndex === albums.length) {
-  //     setSlideIndex(1);
-  //   }
-  //   console.log("nextSlide");
-  // };
   const nextSlide = () => {
-    if (slideIndex >= albums.lenght + 1) {
+    console.log("slide Index>>>", slideIndex);
+    console.log("album length>>>", albums.length);
+    if (slideIndex >= albums.length - 1) {
       // setSlideIndex(1);
-      setSlideIndex(1);
+      setSlideIndex(0);
     } else {
       setSlideIndex(slideIndex + 1);
     }
@@ -53,8 +41,8 @@ function Album() {
   };
 
   const prevSlide = () => {
-    if (slideIndex < 1) {
-      setSlideIndex(albums.lenght);
+    if (slideIndex <= 0) {
+      setSlideIndex(albums.length);
     } else {
       setSlideIndex(slideIndex - 1);
     }
@@ -72,13 +60,19 @@ function Album() {
       <div className={modal ? "modal open" : "modal"}>
         <div>
           {/* {albums ? <img src={albums[slideIndex].url} alt="" /> : "nothing"} */}
-          {albums && slideIndex && <img src={albums[slideIndex].url} alt="" />}
+          {slideIndex
+            ? console.log("URL displayed >>>", albums[slideIndex].url)
+            : console.log("no slideIndex", slideIndex)}
+          {albums && (
+            <img className="modal-image" src={albums[slideIndex].url} alt="" />
+          )}
 
-          <button className="carousel-close-btn" onClick={handleOnclick}>
+          <CloseIcon className="modal-close-btn" onClick={handleOnclick}>
             close modal
-          </button>
-          <BtnSlider moveSlide={nextSlide} direction={"next"} />
-          <BtnSlider moveSlide={prevSlide} direction={"prev"} />
+          </CloseIcon>
+
+          <BtnModal moveSlide={nextSlide} direction={"siguiente"} />
+          <BtnModal moveSlide={prevSlide} direction={"anterior"} />
         </div>
       </div>
       <div className="Album_GridContainer">

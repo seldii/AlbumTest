@@ -23,26 +23,27 @@ function App() {
   const upload = (file) => {
     console.log("uploaded file", file);
     setImgUpload(0);
+
     const target = {
       Bucket: "rhmybucket",
       Key: file.name,
       Body: file,
     };
     const creds = {
-      AWS_ACCESS_KEY_ID: process.env.REACT_APP_aws_access_key_id, //REVIEW check use of credentials
-      AWS_SECRET_ACCESS_KEY: process.env.REACT_APP_aws_secret_access_key,
+      accessKeyId: process.env.REACT_APP_aws_access_key_id, //REVIEW check use of credentials
+      secretAccessKey: process.env.REACT_APP_aws_secret_access_key,
     };
     try {
       const parallelUploads3 = new Upload({
         client: new S3Client({
           region: "eu-central-1",
-          credentials: { creds },
+          credentials: creds,
         }),
 
         leavePartsOnError: false, // optional manually handle dropped parts
         params: target,
       });
-
+      console.log(`parallel`, parallelUploads3);
       parallelUploads3.on("httpUploadProgress", (progress) => {
         console.log(progress);
       });

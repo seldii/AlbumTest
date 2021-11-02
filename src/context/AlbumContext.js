@@ -12,7 +12,7 @@ export const AlbumContextProvider = ({ children }) => {
   const showImg = (img) => {
     setClickedImg(img);
     setModal(true);
-    setSlideIndex(img.id);
+    setSlideIndex(img.id - 1);
     console.log(img.id);
   };
 
@@ -22,7 +22,7 @@ export const AlbumContextProvider = ({ children }) => {
         "https://jsonplaceholder.typicode.com/albums/1/photos"
       );
       const obj = await response.json();
-      console.log(obj);
+      // console.log(obj);
       setAlbums(obj);
     } catch (error) {
       //   console.log(error.response.data.error);
