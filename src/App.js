@@ -1,12 +1,13 @@
 import Album from "./components/album/Album";
 import "./App.css";
-import Carousel from "./components/carousel/Carousel";
 
 import { Upload } from "@aws-sdk/lib-storage";
 import { S3Client, S3 } from "@aws-sdk/client-s3";
 import { LinearProgress } from "@material-ui/core";
 import { useState } from "react";
 import { BrowserRouter as Switch, Route } from "react-router-dom";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 function App() {
   const [imgUpload, setImgUpload] = useState(0);

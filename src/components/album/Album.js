@@ -41,8 +41,8 @@ function Album() {
   };
 
   const prevSlide = () => {
-    if (slideIndex <= 0) {
-      setSlideIndex(albums.length);
+    if (slideIndex === 0) {
+      setSlideIndex(albums.length - 1);
     } else {
       setSlideIndex(slideIndex - 1);
     }
